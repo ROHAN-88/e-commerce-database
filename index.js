@@ -36,7 +36,7 @@ app.use(productRouter);
 //cart router
 app.use(cartRouter);
 
-db_connect();
+await db_connect();
 // console.log();/
 const port = process.env.API_PORT;
 
