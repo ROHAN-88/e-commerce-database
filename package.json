@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "env-cmd -f .env nodemon index.js",
+    "start": "node sever.js",
+    "dev": "env-cmd -f .env nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
