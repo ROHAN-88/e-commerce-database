@@ -38,7 +38,7 @@ app.use(cartRouter);
 
 await db_connect();
 // console.log();/
-const port = process.env.API_PORT;
+const port = process.env.API_PORT || 8000;
 
 app.listen(port, () => {
   console.log(`App is listening at ${port}`);

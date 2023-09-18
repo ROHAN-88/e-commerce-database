@@ -1,10 +1,8 @@
-import mongoose from "mongoose";
-import express from "express";
-import { User } from "./user.model.js";
 import bcrypt from "bcrypt";
 import Jwt from "jsonwebtoken";
+import { accesTokenSecret } from "../constant/constant.js";
+import { User } from "./user.model.js";
 import { loginValidationSchema, Uservalidation } from "./user.validation.js";
-import { Cart } from "../cart/cart.model.js";
 //!checking if user exist or not
 export const checkUser = async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -73,7 +71,7 @@ export const login = async (req, res) => {
   //access token
   const accesstoken = Jwt.sign(
     { email: user.email },
-    process.env.ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET || accesTokenSecret,
     {
       expiresIn: "1d",
     }

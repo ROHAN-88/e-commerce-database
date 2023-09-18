@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { User } from "../user/user.model.js";
+import { accesTokenSecret } from "../constant/constant.js";
 
 //!is seller midderware
 
@@ -14,7 +15,10 @@ export const isSeller = async (req, res, next) => {
   }
   try {
     //decrypt the token
-    const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const userData = jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN || accesTokenSecret
+    );
     //find the user
     const user = await User.findOne({ email: userData.email });
 
@@ -45,7 +49,10 @@ export const isBuyer = async (req, res, next) => {
   }
 
   try {
-    const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const userData = jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN || accesTokenSecret
+    );
 
     const user = await User.findOne({ email: userData.email });
     if (!user) {
@@ -77,7 +84,10 @@ export const isUser = async (req, res, next) => {
   }
   try {
     //decrypt the token
-    const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const userData = jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN || accesTokenSecret
+    );
     //find the user
     const user = await User.findOne({ email: userData.email });
 
