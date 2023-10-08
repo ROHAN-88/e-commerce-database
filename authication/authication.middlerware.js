@@ -11,7 +11,7 @@ export const isSeller = async (req, res, next) => {
   const token = splitterArray[1];
   //if not token terminate
   if (!token) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send("Unauthorized-dd");
   }
   try {
     //decrypt the token
@@ -24,14 +24,14 @@ export const isSeller = async (req, res, next) => {
     }
     //if user role is seller terminate
     if (user.role !== "seller") {
-      return res.status(401).send("Unauthorized");
+      return res.status(401).send("Unauthorized-cc");
     }
 
     //add user to req
     req.userInfo = user;
     next();
   } catch (e) {
-    return res.status(400).send({ message: "Unauthorized" });
+    return res.status(400).send({ message: "Unauthorized-error" });
   }
 };
 //!is buyer
