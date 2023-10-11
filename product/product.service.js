@@ -122,8 +122,10 @@ export const getAllProduct = async (req, res) => {
     },
   ]);
   // const totalItems = await Product.find({})
+  const totalItems = await Product.find({}).count();
 
-  return res.status(200).send(product);
+  const totalPage = Math.ceil(totalItems / query.limit);
+  return res.status(200).send({ product, totalPage });
 };
 
 //!get all seller product
