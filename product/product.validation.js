@@ -6,7 +6,7 @@ export const addProductValidationSchema = Joi.object({
   price: Joi.number().min(0).required(),
   freeShipping: Joi.boolean().required(),
   description: Joi.string().required().min(10).max(3000),
-  imageUrl: Joi.string(),
+  imageUrl: Joi.string().allow(null, " "),
   quantity: Joi.number().min(1).required().integer(),
   category: Joi.string()
     .trim()

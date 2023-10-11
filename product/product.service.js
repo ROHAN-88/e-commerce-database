@@ -199,14 +199,15 @@ export const productEdit = async (req, res) => {
       { _id: productId },
       {
         $set: {
+          imageUrl: productBody.imageUrl,
           name: productBody.name,
           company: productBody.company,
+          description: productBody.description,
           price: productBody.price,
           freeShipping: productBody.freeShipping,
           quantity: productBody.quantity,
           category: productBody.category,
           color: productBody.color,
-          // todo :add all data
         },
       }
     );

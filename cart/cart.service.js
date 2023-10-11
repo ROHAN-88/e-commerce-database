@@ -175,6 +175,7 @@ export const cartDetail = async (req, res) => {
     },
     {
       $project: {
+        imageUrl: { $first: "$productDetails.imageUrl" },
         name: { $first: "$productDetails.name" },
         company: { $first: "$productDetails.company" },
         unitPrice: { $first: "$productDetails.price" },
