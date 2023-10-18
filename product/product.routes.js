@@ -10,9 +10,13 @@ import {
   getAllProduct,
   getProduct,
   getSellerProduct,
+  latestProduct,
   productEdit,
 } from "./product.service.js";
-import { addProductValidationSchema } from "./product.validation.js";
+import {
+  addProductValidationSchema,
+  countVaidation,
+} from "./product.validation.js";
 import { Product } from "./product.model.js";
 import { checkMongooseIdValidity } from "../utils/util.js";
 
@@ -35,5 +39,8 @@ router.post("/product/seller/all", isSeller, getSellerProduct);
 
 //edit product detail
 router.put("/product/edit/:id", isSeller, productEdit);
+
+//product latests
+router.post("/product/latest/:count", latestProduct);
 
 export default router;

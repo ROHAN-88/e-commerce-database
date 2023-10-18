@@ -3,6 +3,7 @@ import { checkIfProductExists, isOwnerOfProduct } from "./product.function.js";
 import { Product } from "./product.model.js";
 import {
   addProductValidationSchema,
+  countVaidation,
   getAllProductsValidation,
 } from "./product.validation.js";
 
@@ -216,6 +217,39 @@ export const productEdit = async (req, res) => {
 
     // console.log(editedProduct);
     res.status(200).send("Edited");
+  } catch (e) {
+    return res.status(400).send({ message: e.message });
+  }
+};
+
+//!latest Product
+export const latestProduct = async (req, res) => {
+  const count = req.params.count;
+  const query = req.body;
+  try {
+    //!validating counts
+    await countVaidation.validateAsync(count);
+
+    let match = query.category
+      ? {
+          category: query.category,
+        }
+      : {};
+    const latestProduct = await Product.aggregate([
+      {
+        $match: match,
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+      {
+        $limit: +count,
+      },
+    ]);
+
+    return res.status(200).send(latestProduct);
   } catch (e) {
     return res.status(400).send({ message: e.message });
   }

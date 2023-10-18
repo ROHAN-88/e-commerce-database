@@ -46,3 +46,6 @@ export const getAllProductsValidation = Joi.object({
     )
   ),
 });
+
+//for latest product counter
+export const countVaidation = Joi.number().integer().min(1).required();
